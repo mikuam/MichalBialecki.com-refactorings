@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MichalBialecki.com.Refactorings
+namespace MichalBialecki.com.Refactorings.Users
 {
     public class UserDto
     {
