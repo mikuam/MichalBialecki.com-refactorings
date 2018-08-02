@@ -1,27 +1,20 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace MichalBialecki.com.Refactorings.Users
+namespace MichalBialecki.com.Refactorings.DAL
 {
-    public class UsersRepository : IUsersRepository
+    public class UsersRepository : BaseRepository, IUsersRepository
     {
         private static class SqlQueries {
             internal static string GetUser = "SELECT [Id], [Name], [LastUpdatedAt] FROM [Users] WHERE Id = @Id";
         }
-
-        private readonly IConfiguration _configuration;
-
-        public UsersRepository(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        
+        public UsersRepository(IConfiguration configuration) : base(configuration) {}
 
         public async Task<UserDto> Get(int userId)
         {
-            var conf = _configuration.GetSection("ConnectionStrings")["Blog"];
-            using (var connection = new SqlConnection(conf))
+            using (var connection = GetBlogConnection())
             {
                 var user = await connection.QueryFirstOrDefaultAsync<UserDto>(
                     SqlQueries.GetUser,

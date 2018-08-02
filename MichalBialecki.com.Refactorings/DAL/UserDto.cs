@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MichalBialecki.com.Refactorings.Users
+namespace MichalBialecki.com.Refactorings.DAL
 {
     public class UserDto
     {

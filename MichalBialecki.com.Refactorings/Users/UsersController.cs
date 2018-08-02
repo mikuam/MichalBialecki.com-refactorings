@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MichalBialecki.com.Refactorings.Core.Clients;
+using MichalBialecki.com.Refactorings.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
