@@ -1,5 +1,4 @@
-﻿using MichalBialecki.com.Refactorings.Core.Clients;
-using MichalBialecki.com.Refactorings.DAL;
+﻿using MichalBialecki.com.Refactorings.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -9,13 +8,11 @@ namespace MichalBialecki.com.Refactorings.Users
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly IUsersRepository _usersRepository;
-        private readonly IUserDescriptionClient _userDescriptionClient;
+        private readonly IUserService _userService;
 
-        public UsersController(IUsersRepository usersRepository, IUserDescriptionClient userDescriptionClient)
+        public UsersController(IUserService userService)
         {
-            _usersRepository = usersRepository;
-            _userDescriptionClient = userDescriptionClient;
+            _userService = userService;
         }
 
         [HttpGet("{userId}")]
@@ -23,8 +20,7 @@ namespace MichalBialecki.com.Refactorings.Users
         {
             try
             {
-                var user = await _usersRepository.Get(userId);
-                var userDesctiption = await _userDescriptionClient.GetUserDescription(userId);
+                var user = _userService.GetUser(userId);
 
                 return Json(user);
             }
