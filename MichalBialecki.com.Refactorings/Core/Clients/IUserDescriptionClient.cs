@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace MichalBialecki.com.Refactorings.Users
+namespace MichalBialecki.com.Refactorings.Core.Clients
 {
     public interface IUserDescriptionClient
     {
